@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Card</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe6e6;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .card {
+            background: red;
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .heart {
+            font-size: 60px;
+            animation: heartbeat 1s infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .heart::before {
+            content: '\2764'; /* Unicode heart character */
+            color: red;
+            font-size: 60px;
+            filter: drop-shadow(0 0 10px red);
+        }
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.3);
+            }
+        }
+        .message {
+            font-size: 18px;
+            margin-top: 10px;
+            color: white;
+        }
+        .glitter {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        .glitter span {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: gold;
+            opacity: 0.8;
+            border-radius: 50%;
+            animation: fall 3s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <video class="video-bg" autoplay loop muted>
+        <source src="Falling Rose Petals.mp4" type="video/mp4">
+    </video>
+    <div class="glitter"></div>
+    <div class="card">
+        <div class="heart"></div>
+        <div class="message">Happy Valentine's Day, My Love! 💖<br>
+            You make my world brighter! 🌍✨
+        </div>
+    </div>
+    <script>
+        function createGlitter() {
+            const glitterContainer = document.querySelector('.glitter');
+            for (let i = 0; i < 100; i++) {
+                let glitter = document.createElement('span');
+                glitter.style.left = Math.random() * 100 + 'vw';
+                glitter.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                glitterContainer.appendChild(glitter);
+                setTimeout(() => glitter.remove(), 3000);
+            }
+        }
+        setInterval(createGlitter, 500);
+    </script>
+</body>
+</html>
